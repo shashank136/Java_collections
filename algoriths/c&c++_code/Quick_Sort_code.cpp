@@ -1,13 +1,6 @@
 #include<iostream>
 using namespace std;
 
-void swap(int* a, int* b)
-{
-    int t = *a;
-    *a = *b;
-    *b = t;
-}
-
 int partition(int a[], int p, int r){
 	// p=0, r=7, x=4, i=-1(initially), j=0
 	int x = a[r]; 
@@ -15,10 +8,10 @@ int partition(int a[], int p, int r){
 	for(int j=p; j<r; j++){
 		if(a[j]<=x){
 			i++;
-			swap(&a[i],&a[j]);
+			swap(a[i],a[j]);
 		}
 	}
-	swap(&a[i+1],&a[r]);
+	swap(a[i+1],a[r]);
 	return i+1;
 }
 
