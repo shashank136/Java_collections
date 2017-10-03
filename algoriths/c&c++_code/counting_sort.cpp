@@ -1,4 +1,4 @@
-#inclunde<iostream>
+#include<iostream>
 using namespace std;
 
 void countingsort(int a[], int size, int k){
