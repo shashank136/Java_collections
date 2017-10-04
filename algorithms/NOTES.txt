@@ -1,1 +1,11 @@
 This folder contains the java and c/c++ code for all sorting algorithms.
+
+Contents:
+1. Insertion sort
+2. Merge sort
+3. Bubble sort
+4. Heap sort
+5. Quick sort
+6. Radix sort
+7. Bucket sort
+8. Counting sort
