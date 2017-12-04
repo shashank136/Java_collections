@@ -1,7 +1,7 @@
 class counting_sort(object):
     """
-    time complaxity of counting sort is O(n+k)
-    sapce complaxity of counting sort is O(k)
+    time complexity of counting sort is O(n+k)
+    sapce complexity of counting sort is O(k)
     """
     def countingsort(self,a,size,k):
         c = [] # stores the number of occurance of an element in array
