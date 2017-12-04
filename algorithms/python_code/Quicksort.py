@@ -2,7 +2,7 @@ class Quicksort(object):
 	"""
 	Quicksort is an in-place sorting algorithm
 	time complexity of quick sort is O(nlogn)
-	space complaxity of quick sort is O(logn)
+	space complexity of quick sort is O(logn)
 	"""
 	def partition(self,a,start,end):
 		pivot = a[end]
