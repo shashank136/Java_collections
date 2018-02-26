@@ -20,7 +20,7 @@ public class Main{
                 flag=false;
                 i=0;
             }
-            if(i==s2.length() && a[j]==b[i-1]){
+            if(i==s2.length()){
                 flag=true;
                 break;
             }
