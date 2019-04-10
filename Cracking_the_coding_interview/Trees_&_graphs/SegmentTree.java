@@ -60,12 +60,27 @@ class SegTreeImpl{
 		return false;
 	}
 
+	public boolean checkLeafNode(SegNode s, int min, int max){
+		if(s.start>=min && s.start<=max)
+			return true;
+		else
+			return false;
+	}
+
 	public int fetchRangeSum(SegNode p, int min, int max){
-		if(p.start==p.end)
-			if(min==p.start)
-				return p.data
+		
+		if(p.start==p.end){ // single node in the segment tree or leaf node
+			if(checkLeafNode(p,min,max)){
+				return p.data;
+			}
+			else{
+				return 0;
+			}
+		}
 		if(checkRange(p,min,max))
 			return fetchRangeSum(p.lc,min,max)+fetchRangeSum(p.rc,min,max);
+		else
+			return 0;
 	}
 
 	public int getRangeSum(int min, int max){
@@ -78,11 +93,68 @@ class SegTreeImpl{
 	public int getMaxSum(){
 		return root.getSum();
 	}
+
+	public void preOrdertraversal(SegNode p){
+		if(p!=null){
+			System.out.print(p.data+" ");
+			preOrdertraversal(p.lc);
+			preOrdertraversal(p.rc);
+		}
+	}
+
+	public void printTree(){
+		SegNode p = root;
+		preOrdertraversal(p);
+	}
+
+	public int updateValues(SegNode p, int n, int val){
+		if(p.start==p.end ){ 
+			if (n==p.start)
+				p.updateNode(val);
+			return p.data;
+		}
+		if(n>p.end || n<p.start)
+			return p.data;
+		return updateValues(p.lc, n, val)+updateValues(p.rc, n, val);
+	}
+
+	public boolean updateNodeValues(int index, int value){
+		SegNode s = root;
+		if(index<s.start || index>s.end)
+			return false;
+		else{
+			s.data = updateValues(s,index,value);
+		}
+		return true;
+	}
 }
 
 public class SegmentTree{
+	
+	public static int maxArraySize(int n){
+		int p = 1;
+		while(p<n){
+			p = p<<1;
+		}
+		return p;
+	}
+
 	public static void main(String[] args) {
-		int ar[] = {1,3,5,7,9,11,0,0};
+		int a[] = {1,3,5,7,9,11}; 
+		int ar[];
+		int l = a.length;
+		int l1 = maxArraySize(l);
+		if(l!=l1){
+			ar = new int[maxArraySize(l)];
+			int i=0;
+			for(i=0; i<l; i++){
+				ar[i] = a[i];
+			}
+			for(; i<l1; i++)
+				ar[i] = 0;
+		}else
+			ar = a;
+
 		int len = ar.length;
 
 		SegTreeImpl t = new SegTreeImpl();
@@ -90,5 +162,9 @@ public class SegmentTree{
 		t.insert(ar,0,len-1);
 		
 		System.out.println(t.getMaxSum());
+		System.out.println(t.getRangeSum(2,4));
+		t.updateNodeValues(2,11);
+		System.out.println(t.getRangeSum(2,4));
+		// t.printTree(); // Un-comment to see the pre-traversal of the segment tree formed.
 	}
 }
